@@ -1,10 +1,8 @@
-import {useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React from 'react';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import axios from 'axios';
 
 export default function App() {
-  const [products, setProducts] = useState('');
-
   const getRandomId = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -79,25 +77,35 @@ export default function App() {
         console.error('Error:', error);
       });
   };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.products}>{products}</Text>
-      <Button title="Get Products" onPress={getProducts} color="green" />
-      <Button title="Get One Product" onPress={getOneProduct} color="green" />
-      <Button
-        title="Get Random Product"
-        onPress={getRandomProduct}
-        color="green"
-      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={getProducts}>
+        <Text>Get Products</Text>
+      </TouchableOpacity>
 
-      <Button
-        title="Get All Recipes"
-        onPress={getAllRecipes}
-        color="green"
-      />
-
-      <Button title="Add Your Product" onPress={addNewProduct} color="green" />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={getOneProduct}>
+        <Text>Get One Product</Text>
+      </TouchableOpacity>
+     
+      <TouchableOpacity
+        style={styles.button}
+        onPress={getRandomProduct}>
+        <Text>Get Random Product</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={getAllRecipes}>
+        <Text>Get All Recipes</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={addNewProduct}>
+        <Text>Add Your Product</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -105,13 +113,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  products: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginHorizontal: 20,
+  button: {
+    backgroundColor: 'lightblue',
+    padding: 10,
+    marginVertical: 5,
   },
 });
