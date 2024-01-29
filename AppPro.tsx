@@ -56,6 +56,20 @@ export default function App() {
       });
   };
 
+  const getAllTodos = () => {
+    axios
+      .get('https://dummyjson.com/todos')
+      .then(function (response) {
+        console.log('Response from API:', response.data);
+      })
+      .catch(function (error) {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+
+  // Post requests using Axios
+
   const addNewProduct = () => {
     axios
       .post(
@@ -77,34 +91,55 @@ export default function App() {
         console.error('Error:', error);
       });
   };
+
+  const addNewTodo = () => {
+    axios
+      .post(
+        'https://dummyjson.com/todos/add',
+        {
+          todo: 'Use DummyJSON in the project',
+          completed: false,
+          userId: 5,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error('Error:', error);
+      });
+  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={getProducts}>
+      <TouchableOpacity style={styles.button} onPress={getProducts}>
         <Text>Get Products</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={getOneProduct}>
+      <TouchableOpacity style={styles.button} onPress={getOneProduct}>
         <Text>Get One Product</Text>
       </TouchableOpacity>
-     
-      <TouchableOpacity
-        style={styles.button}
-        onPress={getRandomProduct}>
+
+      <TouchableOpacity style={styles.button} onPress={getRandomProduct}>
         <Text>Get Random Product</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={getAllRecipes}>
+      <TouchableOpacity style={styles.button} onPress={getAllRecipes}>
         <Text>Get All Recipes</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={addNewProduct}>
+
+      <TouchableOpacity style={styles.button} onPress={getAllTodos}>
+        <Text>Get All Todos</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={addNewProduct}>
         <Text>Add Your Product</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={addNewTodo}>
+        <Text>Add Your Todo</Text>
       </TouchableOpacity>
     </View>
   );
